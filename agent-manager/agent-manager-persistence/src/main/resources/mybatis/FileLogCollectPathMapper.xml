@@ -64,7 +64,7 @@
 
   <select id="countAll" resultType="java.lang.Long" >
     select
-      count (*)
+      count(*)
     from tb_file_log_collect_path
   </select>
 

@@ -253,7 +253,7 @@
 
   <select id="countByHostType" parameterType="java.lang.Integer" resultType="java.lang.Long" >
     select
-      count (*)
+      count(*)
     from tb_host
     where container = #{container,jdbcType=TINYINT}
   </select>
