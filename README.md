@@ -107,6 +107,8 @@
 
 [《KnowAgent代码贡献指南》](doc/know_agent_contributing.md)
 
+[《KnowAgent常见问题》](doc/Q&A.md)
+
 # 3 KnowAgent开源用户交流群
 
 ​	请添加微信号：mike_zhangliang 或 WilliamHu66，回复”KnowAgent 加群“。
