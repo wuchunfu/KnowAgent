@@ -648,7 +648,7 @@ public class LogCollectTaskManageServiceImpl implements LogCollectTaskManageServ
         List<String> dateTimeFormatList = getDateTimeFormats();
         for (String dateTimeFormat : dateTimeFormatList) {
             try {
-                if(dateTimeFormat.length() != sliceDateTimeString.length()) {
+                if(dateTimeFormat.replaceAll("'", "").length() != sliceDateTimeString.length()) {
                     continue;
                 }
                 Date date = new SimpleDateFormat(dateTimeFormat).parse(sliceDateTimeString);
