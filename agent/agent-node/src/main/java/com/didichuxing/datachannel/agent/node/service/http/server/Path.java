@@ -96,6 +96,7 @@ public class Path extends Handler implements HttpHandler {
             if (StringUtils.isBlank(suffix)) {
                 validFileList.add(fileOrDir.getName());
             } else {
+                validFileList.add(fileOrDir.getName());
                 File parent = fileOrDir.getParentFile();
                 File[] files = parent.listFiles();
                 for (File file : files) {
