@@ -24,10 +24,9 @@ import org.apache.kafka.common.PartitionInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 
 import java.util.*;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 @org.springframework.stereotype.Service
 public class DefaultKafkaClusterManageServiceExtensionImpl implements KafkaClusterManageServiceExtension {
@@ -36,7 +35,8 @@ public class DefaultKafkaClusterManageServiceExtensionImpl implements KafkaClust
 
     private static final Integer ADMIN_CLIENT_REQUEST_TIME_OUT_UNIT_MS = 6000;
 
-    private static final String CONSUMER_GROUP_ID = "agentMetricsConsumerGroup";
+    @Value("${consumer.id}")
+    private String agentMetricsAndErrorLogsConsumerGroupId;
 
     @Autowired
     private RemoteKafkaClusterService remoteKafkaClusterService;
@@ -290,7 +290,7 @@ public class DefaultKafkaClusterManageServiceExtensionImpl implements KafkaClust
     public Properties getKafkaConsumerProperties(String bootstrapServers) {
             Properties props = new Properties();
             props.put("bootstrap.servers", bootstrapServers);
-            props.put("group.id", CONSUMER_GROUP_ID);
+            props.put("group.id", agentMetricsAndErrorLogsConsumerGroupId);
             props.put("enable.auto.commit", "true");
             props.put("auto.commit.interval.ms", "1000");
             props.put("session.timeout.ms", "30000");

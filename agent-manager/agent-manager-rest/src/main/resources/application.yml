@@ -85,3 +85,6 @@ system:
 file:
   upload:
     dir: /root/ka/am/output/upload
+
+consumer:
+  id: agentMetricsAndErrorLogsConsumerGroup
