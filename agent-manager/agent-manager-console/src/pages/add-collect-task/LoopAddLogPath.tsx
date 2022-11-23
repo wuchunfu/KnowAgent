@@ -57,7 +57,7 @@ const LoopAddLogFileType = (props: any) => {
 
   const onSelectChange = (value) => {
     const res = value?.[value.length - 1];
-    setFieldsValue({ step2_file_suffixMatchRegular: [res] });
+    setFieldsValue({ step2_file_suffixMatchRegular: res ? [res] : undefined });
   };
 
   const useDebounce = (fn: any, delay: number, dep = []) => {
