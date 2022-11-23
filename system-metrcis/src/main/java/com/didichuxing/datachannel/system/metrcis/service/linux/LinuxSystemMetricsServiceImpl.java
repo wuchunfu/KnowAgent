@@ -588,16 +588,12 @@ public class LinuxSystemMetricsServiceImpl extends LinuxMetricsService implement
 
     private Double getSystemLoad1Only() {
         try {
-            List<String> lines = getOutputByCmd("sar -q 1 1 | grep ':' | awk '{print $4}'", "系统近1分钟平均负载", null);
-            if (!lines.isEmpty() && StringUtils.isNotBlank(lines.get(0))) {
-                Double systemLoad1 = Double.parseDouble(lines.get(0));
-                return MathUtil.divideWith2Digit(systemLoad1, getSystemCpuCores());
-            } else {
-                LOGGER.error("class=LinuxSystemMetricsService()||method=getSystemLoad1Only||msg=获取系统近1分钟平均负载失败");
-                return 0.0d;
-            }
+            List<String> lines = getOutputByCmd("sar -q 1 1", "系统近1分钟平均负载", null);
+            String average = lines.get(4);
+            String[] columns = average.split("\\s+");
+            return Double.valueOf(columns[3]);
         } catch (Exception ex) {
-            LOGGER.warn("class=LinuxSystemMetricsServiceImpl||method=getSystemLoad1Only||msg=metric compute error", ex);
+            LOGGER.error("class=LinuxSystemMetricsService()||method=getSystemLoad1Only||msg="+ex.getMessage());
             return 0.0d;
         }
     }
@@ -617,16 +613,12 @@ public class LinuxSystemMetricsServiceImpl extends LinuxMetricsService implement
 
     private Double getSystemLoad5Only() {
         try {
-            List<String> lines = getOutputByCmd("sar -q 1 1 | grep ':' | awk '{print $5}'", "系统近5分钟平均负载", null);
-            if (!lines.isEmpty() && StringUtils.isNotBlank(lines.get(0))) {
-                Double systemLoad5 = Double.parseDouble(lines.get(0));
-                return MathUtil.divideWith2Digit(systemLoad5, getSystemCpuCores());
-            } else {
-                LOGGER.error("class=LinuxSystemMetricsService()||method=getSystemLoad5Only||msg=data is null");
-                return 0.0d;
-            }
+            List<String> lines = getOutputByCmd("sar -q 1 1", "系统近1分钟平均负载", null);
+            String average = lines.get(4);
+            String[] columns = average.split("\\s+");
+            return Double.valueOf(columns[4]);
         } catch (Exception ex) {
-            LOGGER.warn("class=LinuxSystemMetricsServiceImpl||method=getSystemLoad5Only||msg=metric compute error", ex);
+            LOGGER.error("class=LinuxSystemMetricsService()||method=getSystemLoad5Only||msg="+ex.getMessage());
             return 0.0d;
         }
     }
@@ -646,16 +638,12 @@ public class LinuxSystemMetricsServiceImpl extends LinuxMetricsService implement
 
     private Double getSystemLoad15Only() {
         try {
-            List<String> lines = getOutputByCmd("sar -q 1 1 | grep ':' | awk '{print $6}'", "系统近15分钟平均负载", null);
-            if (!lines.isEmpty() && StringUtils.isNotBlank(lines.get(0))) {
-                Double systemLoad15 = Double.parseDouble(lines.get(0));
-                return MathUtil.divideWith2Digit(systemLoad15, getSystemCpuCores());
-            } else {
-                LOGGER.error("class=LinuxSystemMetricsService()||method=getSystemLoad15Only||msg=data is null");
-                return 0.0d;
-            }
+            List<String> lines = getOutputByCmd("sar -q 1 1", "系统近1分钟平均负载", null);
+            String average = lines.get(4);
+            String[] columns = average.split("\\s+");
+            return Double.valueOf(columns[5]);
         } catch (Exception ex) {
-            LOGGER.warn("class=LinuxSystemMetricsServiceImpl||method=getSystemLoad15Only||msg=metric compute error", ex);
+            LOGGER.error("class=LinuxSystemMetricsService()||method=getSystemLoad15Only||msg="+ex.getMessage());
             return 0.0d;
         }
     }
