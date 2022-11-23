@@ -9,6 +9,7 @@ import com.didichuxing.datachannel.agentmanager.core.kafkacluster.KafkaClusterMa
 import com.didichuxing.datachannel.agentmanager.persistence.AgentErrorLogDAO;
 import com.didichuxing.datachannel.agentmanager.thirdpart.kafkacluster.extension.KafkaClusterManageServiceExtension;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.concurrent.BasicThreadFactory;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
@@ -45,7 +46,9 @@ public class ErrorLogsManageServiceImpl implements ErrorLogsManageService {
     private volatile boolean errorLogsWriteStopped = true;
     private static final Long RECEIVER_CLOSE_TIME_OUT_MS = 1 * 60 * 1000l;
     private ReceiverDO lastAgentErrorLogsReceiver = null;
-    private static final ExecutorService errorLogsWriteThreadPool = Executors.newSingleThreadExecutor();
+    private static final ExecutorService errorLogsWriteThreadPool = Executors.newSingleThreadExecutor(
+            new BasicThreadFactory.Builder().namingPattern("ErrorLogs-ConsumerAndPersist-Thread").build()
+    );
 
     @Override
     @Transactional

@@ -30,6 +30,7 @@ import com.didichuxing.datachannel.agentmanager.persistence.*;
 import com.didichuxing.datachannel.agentmanager.thirdpart.kafkacluster.extension.KafkaClusterManageServiceExtension;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.concurrent.BasicThreadFactory;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
@@ -109,7 +110,9 @@ public class MetricsManageServiceImpl implements MetricsManageService {
     private volatile boolean metricsWriteStopped = true;
     private static final Long RECEIVER_CLOSE_TIME_OUT_MS = 1 * 60 * 1000l;
     private ReceiverDO lastAgentMetricsReceiver = null;
-    private static final ExecutorService metricsWriteThreadPool = Executors.newSingleThreadExecutor();
+    private static final ExecutorService metricsWriteThreadPool = Executors.newSingleThreadExecutor(
+            new BasicThreadFactory.Builder().namingPattern("Metrics-ConsumerAndPersist-Thread").build()
+    );
 
     @Override
     @Transactional
