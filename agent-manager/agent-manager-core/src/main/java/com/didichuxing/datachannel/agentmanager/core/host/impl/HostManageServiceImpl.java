@@ -208,7 +208,7 @@ public class HostManageServiceImpl implements HostManageService {
         if(CollectionUtils.isNotEmpty(serviceDOList)) {
             throw new ServiceException(
                     String.format(
-                            "删除失败：待删除主机存在%d个关联的应用",
+                            "删除失败：待删除主机存在%d个关联的应用，请在应用管理移除应用与待删除主机的关联关系",
                             serviceDOList.size()
                     ),
                     ErrorCodeEnum.RELATION_SERVICES_EXISTS_WHEN_DELETE_HOST.getCode()

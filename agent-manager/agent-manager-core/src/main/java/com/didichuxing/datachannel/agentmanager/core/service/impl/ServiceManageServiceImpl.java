@@ -286,14 +286,14 @@ public class ServiceManageServiceImpl implements ServiceManageService {
             List<LogCollectTaskDO> logCollectTaskDOList = logCollectTaskManageService.getLogCollectTaskListByServiceId(serviceId);
             if(CollectionUtils.isNotEmpty(logCollectTaskDOList)) {//待删除service存在关联logcollecttask
                 throw new ServiceException(
-                        String.format("删除失败：待删除应用存在%d个关联的采集任务", logCollectTaskDOList.size()),
+                        String.format("删除失败：待删除应用存在%d个关联的采集任务，请先删除关联的采集任务", logCollectTaskDOList.size()),
                         ErrorCodeEnum.SERVICE_DELETE_FAILED_CAUSE_BY_RELA_LOGCOLLECTTASK_EXISTS.getCode()
                 );
             }
             List<HostDO> hostDOList = hostManageService.getHostsByServiceId(serviceId);
             if(CollectionUtils.isNotEmpty(hostDOList)) {//待删除service存在关联 host
                 throw new ServiceException(
-                        String.format("删除失败：待删除应用存在%d个关联的主机", hostDOList.size()),
+                        String.format("删除失败：待删除应用存在%d个关联的主机，请在应用编辑页移除待删除应用与主机的关联关系", hostDOList.size()),
                         ErrorCodeEnum.SERVICE_DELETE_FAILED_CAUSE_BY_RELA_HOST_EXISTS.getCode()
                 );
             }

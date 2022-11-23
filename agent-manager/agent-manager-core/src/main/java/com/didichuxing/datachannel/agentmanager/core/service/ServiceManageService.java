@@ -1,11 +1,8 @@
 package com.didichuxing.datachannel.agentmanager.core.service;
 
-import com.didichuxing.datachannel.agentmanager.common.bean.domain.host.HostDO;
 import com.didichuxing.datachannel.agentmanager.common.bean.domain.service.ServiceDO;
 import com.didichuxing.datachannel.agentmanager.common.bean.domain.service.ServicePaginationQueryConditionDO;
-import com.didichuxing.datachannel.agentmanager.common.bean.common.Result;
 import com.didichuxing.datachannel.agentmanager.common.bean.domain.service.ServicePaginationRecordDO;
-
 import java.util.List;
 
 public interface ServiceManageService {
