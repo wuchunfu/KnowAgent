@@ -70,9 +70,9 @@ function start() {
 
     #判断是否是centos6.7版本的系统
     if [ "X$LINUX_VERSION" == "X6.7" ];then
-        JAVA_OPTS=" $JAVA_OPTS -Djava.library.path=${workspace}/bin/native_lib/6.7/"
+        JAVA_OPTS=" $JAVA_OPTS -Djava.library.path=${workspace}/bin/"
     else
-        JAVA_OPTS=" $JAVA_OPTS -Djava.library.path=${workspace}/bin/native_lib/7.2/"
+        JAVA_OPTS=" $JAVA_OPTS -Djava.library.path=${workspace}/bin/"
     fi
 
     # 判断JAVA_HOME是否存在
