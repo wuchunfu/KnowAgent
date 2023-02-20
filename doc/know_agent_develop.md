@@ -22,6 +22,10 @@
 mysql -uXXXX -pXXX -h XXX.XXX.XXX.XXX -PXXXX < ./create_mysql_table.sql
 ```
 
+#### 1.1.1.3 依赖项目 System-Metrics 编译、打包
+
+​	进入`system-metrcis`目录，执行`mvn clean install`命令。
+
 ### 1.1.2 本地启动
 
 ​	因为本地直接使用`IDEA`启动，并不会将前端资源文件生成，因此在第一次启动之前，需要在`agent-manager`目录下执行`mvn clean install -DskipTests`命令，将前端的静态资源文件打包出来。命令执行完成以后，修改`application.yml`配置文件，然后点击启动，本地启动成功之后，访问 http://localhost:9010。具体的`IDEA`启动及配置见图：
@@ -51,7 +55,7 @@ mysql -uXXXX -pXXX -h XXX.XXX.XXX.XXX -PXXXX < ./create_mysql_table.sql
 - `kafka 2.3+`
 - `IDEA`
 
-**注意：在搭建 Agent 本地开发环境前，请先对 `System-Metrics`项目与 `Agent-Manager` 项目进行 Maven 打包、安装。**
+**注意：在搭建 Agent 本地开发环境前，请先对`Agent-Manager`项目进行 Maven 打包、安装。**
 
 ### 1.2.2 本地启动
 
