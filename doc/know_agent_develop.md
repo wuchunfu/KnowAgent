@@ -1,10 +1,14 @@
-# 1 开发环境搭建
+# 1 项目依赖说明
 
-## 1.1 Agent Manager 本地开发环境搭建
+​	`Agent`项目依赖`Agent-Manager`项目，`Agent-Manager`项目依赖`System-Metrics`项目，因而在项目编译、打包时，需要注意顺序，在下面的**开发环境搭建**部分会有详细说明。
 
-### 1.1.1 环境准备
+# 2 开发环境搭建
 
-#### 1.1.1.1 环境依赖
+## 2.1 Agent Manager 本地开发环境搭建
+
+### 2.1.1 环境准备
+
+#### 2.1.1.1 环境依赖
 
 - `Java 8+`
 - `Maven 3.5+`
@@ -13,7 +17,7 @@
 - `kafka 2.3+`
 - `IDEA`
 
-#### 1.1.1.2 数据库初始化
+#### 2.1.1.2 数据库初始化
 
 ​	执行`agent-manager`目录中的`create_mysql_table.sql`这个sql文件，初始化mysql表。
 
@@ -22,33 +26,33 @@
 mysql -uXXXX -pXXX -h XXX.XXX.XXX.XXX -PXXXX < ./create_mysql_table.sql
 ```
 
-#### 1.1.1.3 依赖项目 System-Metrics 编译、打包
+#### 2.1.1.3 依赖项目 System-Metrics 编译、打包
 
 ​	进入`system-metrcis`目录，执行`mvn clean install`命令。
 
-### 1.1.2 本地启动
+### 2.1.2 本地启动
 
 ​	因为本地直接使用`IDEA`启动，并不会将前端资源文件生成，因此在第一次启动之前，需要在`agent-manager`目录下执行`mvn clean install -DskipTests`命令，将前端的静态资源文件打包出来。命令执行完成以后，修改`application.yml`配置文件，然后点击启动，本地启动成功之后，访问 http://localhost:9010。具体的`IDEA`启动及配置见图：
 
-#### **1.1.2.1 IDEA 打包**
+#### **2.1.2.1 IDEA 打包**
 
 <img src="https://images-github.oss-cn-hangzhou.aliyuncs.com/know-agent/development/1.png" />
 
-#### **1.1.2.2 修改 application.yml 配置文件**
+#### **2.1.2.2 修改 application.yml 配置文件**
 
 <img src="https://images-github.oss-cn-hangzhou.aliyuncs.com/know-agent/development/2.png" />
 
 <img src="https://images-github.oss-cn-hangzhou.aliyuncs.com/know-agent/development/3.png" />
 
-#### **1.1.2.3 启动 Agent-Manager**
+#### **2.1.2.3 启动 Agent-Manager**
 
 <img src="https://images-github.oss-cn-hangzhou.aliyuncs.com/know-agent/development/4.png" />
 
-## 1.2 Agent 本地开发环境搭建
+## 2.2 Agent 本地开发环境搭建
 
-### 1.2.1 环境准备
+### 2.2.1 环境准备
 
-#### 1.2.1.1 环境依赖
+#### 2.2.1.1 环境依赖
 
 - `Java 8+`
 - `Maven 3.5+`
@@ -57,25 +61,25 @@ mysql -uXXXX -pXXX -h XXX.XXX.XXX.XXX -PXXXX < ./create_mysql_table.sql
 
 **注意：在搭建 Agent 本地开发环境前，请先对`Agent-Manager`项目进行 Maven 打包、安装。**
 
-### 1.2.2 本地启动
+### 2.2.2 本地启动
 
-#### **1.2.2.1 修改 conf/settings.properties 配置文件**
+#### **2.2.2.1 修改 conf/settings.properties 配置文件**
 
 <img src="https://images-github.oss-cn-hangzhou.aliyuncs.com/know-agent/development/5.png" />
 
-#### **1.2.2.2 启动 Agent**
+#### **2.2.2.2 启动 Agent**
 
 <img src="https://images-github.oss-cn-hangzhou.aliyuncs.com/know-agent/development/6.png" />
 
-# 2 KnowAgent 简要介绍
+# 3 KnowAgent 简要介绍
 
-## 2.1 Agent 
+## 3.1 Agent 
 
-### 2.1.1 架构
+### 3.1.1 架构
 
 <img src="https://images-github.oss-cn-hangzhou.aliyuncs.com/know-agent/agent_structure.png" />
 
-### 2.1.2 各模块介绍
+### 3.1.2 各模块介绍
 
 | 模块                   | 说明           | 详细说明                                                     |
 | ---------------------- | -------------- | ------------------------------------------------------------ |
@@ -88,17 +92,17 @@ mysql -uXXXX -pXXX -h XXX.XXX.XXX.XXX -PXXXX < ./create_mysql_table.sql
 | agent-common           | 公共模块       | 公共的常量类、枚举类等                                       |
 | agent-integration-test | 一体化测试模块 | Agent 一体化测试相关的功能类、测试类                         |
 
-### 2.1.3 核心 E-R 图
+### 3.1.3 核心 E-R 图
 
 <img src="https://images-github.oss-cn-hangzhou.aliyuncs.com/know-agent/development/7.png" />
 
-## 2.2 Agent-Manager
+## 3.2 Agent-Manager
 
-### 2.2.1 架构
+### 3.2.1 架构
 
 <img src="https://images-github.oss-cn-hangzhou.aliyuncs.com/know-agent/development/8.png" />
 
-### 2.2.2 各模块介绍
+### 3.2.2 各模块介绍
 
 | 模块                      | 说明           | 详细说明                                                     |
 | ------------------------- | -------------- | ------------------------------------------------------------ |
@@ -111,6 +115,6 @@ mysql -uXXXX -pXXX -h XXX.XXX.XXX.XXX -PXXXX < ./create_mysql_table.sql
 | agent-manager-remote      | 远程访问模块   | 封装一些用于与其他系统进行交互的功能接口                     |
 | agent-manager-console     | 前端模块       | 前端相关代码、静态资源文件                                   |
 
-### 2.2.3 核心 E-R 图
+### 3.2.3 核心 E-R 图
 
 <img src="https://images-github.oss-cn-hangzhou.aliyuncs.com/know-agent/development/9.png" />
